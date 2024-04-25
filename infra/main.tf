@@ -137,27 +137,35 @@ resource "aws_iam_user_policy" "s3_user_policy" {
   })
 }
 
-resource "github_actions_variable" "ga_bucket_variable" {
-  repository    = "yoogle"
-  variable_name = "AWS_S3_BUCKET"
-  value         = aws_s3_bucket.web_bucket.id
+resource "github_actions_secret" "ga_bucket_variable" {
+  repository      = "yoogle"
+  secret_name     = "AWS_S3_BUCKET"
+  encrypted_value = aws_s3_bucket.web_bucket.id
+
+  depends_on = [aws_s3_bucket.web_bucket]
 }
 
-resource "github_actions_variable" "ga_access_key_id_variable" {
-  repository    = "yoogle"
-  variable_name = "AWS_ACCESS_KEY_ID"
-  value         = aws_iam_access_key.s3_user_key.id
+resource "github_actions_secret" "ga_access_key_id_variable" {
+  repository      = "yoogle"
+  secret_name     = "AWS_ACCESS_KEY_ID"
+  encrypted_value = aws_iam_access_key.s3_user_key.id
+
+  depends_on = [aws_iam_access_key.s3_user_key]
 }
 
 resource "github_actions_secret" "ga_secret_access_key_variable" {
   repository      = "yoogle"
   secret_name     = "AWS_SECRET_ACCESS_KEY"
   encrypted_value = aws_iam_access_key.s3_user_key.secret
+
+  depends_on = [aws_iam_access_key.s3_user_key]
 }
 
-resource "github_actions_variable" "ga_aws_region_variable" {
-  repository    = "yoogle"
-  variable_name = "AWS_REGION"
-  value         = var.aws_region
+resource "github_actions_secret" "ga_aws_region_variable" {
+  repository      = "yoogle"
+  secret_name     = "AWS_REGION"
+  encrypted_value = var.aws_region
+
+  depends_on = [aws_iam_access_key.s3_user_key]
 }
 
