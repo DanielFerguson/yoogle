@@ -70,12 +70,11 @@ As aforementioned, I want to keep this fairly simple. While some tech choices ar
 | Website hosting | S3              | Dirt cheap.                                                            |
 | Functions       | Lambda          | Scales to zero, and is dead simple.                                    |
 | Authentication  | Clerk           | It's awesome, and free!                                                |
-| DNS & WAF       | Cloudflare      | I already use it, and love it.                                         |
+| DNS             | Cloudflare      | I already use it, and love it.                                         |
 | IaC             | Terraform       | I want to get better at it for other projects.                         |
 | Database        | Neon DB         | Cheap, and Postgres!                                                   |
-| Vector DB       | Pinecone        | I want to use it more. May end up using PGVector though.               |
 | Embedding Model | Unsure          | Still investigating the most cost efficient (read: 'cheap') tool here. |
-| Repo structure  | PNPM Workspaces | I want to be able to share types between frontend & backend            |
+| Repo tooling    | PNPM Workspaces | I want to be able to share types between frontend & backend            |
 
 #### Other Tools
 
