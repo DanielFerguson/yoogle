@@ -99,3 +99,11 @@ As aforementioned, I want to keep this fairly simple. While some tech choices ar
 - [ ] I am able to log into the website.
 - [ ] When authenticated, I am able to suggest videos to be transcribed by submitting YouTube URLs.
 - [ ] When authenticated, I can see the videos that I previously submitted and their transcription status.
+
+## Tasks
+
+- [x] Create frontend (`/apps/web`) project
+- [x] Create basic infrastructure project
+- [x] Setup `yoogle-frontend` S3 bucket
+- [x] Setup GitHub Actions to build the `web` app and upload to `yoogle-frontend` bucket
+- [x] Setup Cloudflare DNS to point `www.yoogle.app` to the `yoogle-frontend` bucket
