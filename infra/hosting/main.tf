@@ -31,13 +31,6 @@ resource "aws_amplify_app" "web" {
         build:
           commands:
             - pnpm run build
-      artifacts:
-        baseDirectory: build
-        files:
-          - apps/web/*
-      cache:
-        paths:
-          - node_modules/**/*
   EOT
 }
 
