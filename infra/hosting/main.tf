@@ -1,55 +1,30 @@
-resource "aws_amplify_app" "web" {
-  name       = "yoogle-web"
-  repository = "https://github.com/danielferguson/yoogle"
-
-  custom_rule {
-    source = "/<*>"
-    status = "404"
-    target = "/index.html"
+terraform {
+  required_providers {
+    vercel = {
+      source  = "vercel/vercel"
+      version = "1.10.1"
+    }
   }
-
-  access_token = var.github_personal_access_token
-
-  enable_auto_branch_creation = true
-
-  auto_branch_creation_patterns = [
-    "*",
-    "*/**",
-  ]
-
-  auto_branch_creation_config {
-    enable_auto_build = true
-  }
-
-  environment_variables = {
-    NODE_ENV                  = "production"
-    AMPLIFY_MONOREPO_APP_ROOT = "apps/web"
-  }
-
-  build_spec = <<-EOT
-    version: 0.1
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm install -g pnpm
-            - pnpm install
-        build:
-          commands:
-            - pnpm run build
-  EOT
 }
 
-resource "aws_amplify_branch" "main" {
-  app_id       = aws_amplify_app.web.id
-  branch_name  = "main"
-  display_name = "production"
+resource "vercel_project" "yoogle" {
+  name      = "yoogle"
+  framework = "vite"
 
-  framework = "React"
-  stage     = "PRODUCTION"
-
-  enable_auto_build       = true
-  enable_performance_mode = true
-
-  tags = var.tags
+  root_directory = "apps/web"
+  git_repository = {
+    type = "github"
+    repo = "danielferguson/yoogle"
+  }
 }
+
+resource "vercel_deployment" "yoogle" {
+  project_id = vercel_project.yoogle.id
+  ref        = "main"
+}
+
+resource "vercel_project_domain" "yoogle" {
+  project_id = vercel_project.yoogle.id
+  domain     = "www.yoogle.com"
+}
+

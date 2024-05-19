@@ -23,3 +23,8 @@ variable "github_personal_access_token" {
   type        = string
 }
 
+variable "vercel_api_token" {
+  description = "Vercel API token"
+  type        = string
+}
+

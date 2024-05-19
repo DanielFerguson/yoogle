@@ -11,7 +11,7 @@ resource "cloudflare_zone_settings_override" "yoogle_ssl_mode" {
   zone_id = var.cloudflare_zone_id
 
   settings {
-    ssl = "flexible"
+    ssl = "full"
   }
 }
 
@@ -26,17 +26,6 @@ resource "cloudflare_record" "yoogle_web_root_dns_record" {
   comment = "Redirect @ to www"
 }
 
-# resource "cloudflare_record" "yoogle_web_www_dns_record" {
-#   name    = "www"
-#   type    = "CNAME"
-#   zone_id = var.cloudflare_zone_id
-
-#   value   = var.website_endpoint
-#   ttl     = 1
-#   proxied = true
-#   comment = "Point www to the S3 bucket"
-# }
-
 resource "cloudflare_record" "yoogle_api_gateway_dns_record" {
   name    = "api"
   type    = "CNAME"
@@ -46,4 +35,15 @@ resource "cloudflare_record" "yoogle_api_gateway_dns_record" {
   ttl     = 1
   proxied = false
   comment = "Point api.yoogle.app to the API Gateway"
+}
+
+resource "cloudflare_record" "yoogle_web_www_dns_record" {
+  name    = "www"
+  type    = "CNAME"
+  zone_id = var.cloudflare_zone_id
+
+  value   = "cname.vercel-dns.com"
+  ttl     = 1
+  proxied = true
+  comment = "Redirect www to cname.vercel-dns.com"
 }

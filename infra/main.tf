@@ -4,15 +4,17 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.16"
     }
-
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4.33"
     }
-
     github = {
       source  = "integrations/github"
       version = "~> 6.0"
+    }
+    vercel = {
+      source  = "vercel/vercel"
+      version = "1.10.1"
     }
   }
 
@@ -28,6 +30,10 @@ provider "cloudflare" {
 }
 
 provider "github" {}
+
+provider "vercel" {
+  api_token = var.vercel_api_token
+}
 
 locals {
   tags = {
