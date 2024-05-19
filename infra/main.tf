@@ -37,25 +37,20 @@ locals {
   repository_name = "yoogle"
 }
 
-module "cicd" {
-  source = "./cicd"
-
-  aws_region            = var.aws_region
-  repository_name       = local.repository_name
-  aws_s3_bucket_id      = module.storage.aws_s3_bucket_id
-  aws_access_key_id     = module.storage.aws_access_key_id
-  aws_secret_access_key = module.storage.aws_secret_access_key
-}
-
 module "dns" {
   source = "./dns"
 
   cloudflare_zone_id = var.cloudflare_zone_id
-  website_endpoint   = module.storage.s3_website_endpoint
+  api_gateway_url    = module.compute.api_gateway_url
 }
 
-module "storage" {
-  source = "./storage"
+module "compute" {
+  source = "./compute"
+}
 
-  tags = local.tags
+module "hosting" {
+  source = "./hosting"
+
+  tags                         = local.tags
+  github_personal_access_token = var.github_personal_access_token
 }
