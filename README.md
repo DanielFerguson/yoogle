@@ -90,6 +90,13 @@ As aforementioned, I want to keep this fairly simple. While some tech choices ar
 
 ![Yoogle solutions architecture design](https://github.com/danielferguson/yoogle/blob/main/assets/yoogle-solutions-architecture-design.png?raw=true)
 
+# Resources
+
+- [Serverless Applications with AWS Lambda and API Gateway](https://registry.terraform.io/providers/hashicorp/aws/2.34.0/docs/guides/serverless-with-aws-lambda-and-api-gateway#allowing-api-gateway-to-access-lambda)
+- [Packaging Python requirements as an AWS Lambda Layer with Terraform](https://cj-hewett.medium.com/packaging-python-requirements-as-an-aws-lambda-layer-with-terraform-188f76db4e96)
+- [elysia-clerk](https://github.com/wobsoriano/elysia-clerk)
+- [elysia](https://elysiajs.com/)
+
 # Roadmap
 
 ## User Stories
@@ -102,8 +109,25 @@ As aforementioned, I want to keep this fairly simple. While some tech choices ar
 
 ## Tasks
 
+2024-04-25
+
 - [x] Create frontend (`/apps/web`) project
 - [x] Create basic infrastructure project
 - [x] Setup `yoogle-frontend` S3 bucket
 - [x] Setup GitHub Actions to build the `web` app and upload to `yoogle-frontend` bucket
 - [x] Setup Cloudflare DNS to point `www.yoogle.app` to the `yoogle-frontend` bucket
+
+2024-0X-XX
+
+- [ ] Setup AWS billing alerts for this project (via tag filtering)
+- [ ] Modularise the `/infra` dir
+- [ ] Setup database
+- [ ] Setup & configure Keysley
+- [ ] Create CLI script to process YouTube videos
+- [ ] Setup web components (shadcn, tailwind)
+- [ ] Create search UI
+- [ ] Plan the necessary API routes
+
+Backlog
+
+- [ ] Scope `s3_user` iam users s3 permissions
